@@ -1,5 +1,7 @@
 # tailwind-classes-fold for Neovim
 
+![Preview](https://i.imgur.com/0nE1Utc.gif)
+
 `tailwind-classes-fold` is a Neovim plugin that improves the readability of your Tailwind CSS classes by applying folding to lines with multiple classes.
 
 ## Features
