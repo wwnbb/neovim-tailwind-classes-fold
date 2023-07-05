@@ -1,7 +1,6 @@
 local M = {}
 local autocmd = require("tailwind-classes-fold.autocmd")
 
-
 M.setup = function()
   autocmd.setup_autocmd()
 end

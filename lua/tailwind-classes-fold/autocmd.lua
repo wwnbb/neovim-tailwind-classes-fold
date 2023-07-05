@@ -6,11 +6,11 @@ M.setup_autocmd = function()
   --
   vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" }, {
     group = group,
-    pattern = { "*.tsx"},
+    pattern = { "*.tsx" },
     callback = function()
       local bufnr = vim.api.nvim_get_current_buf()
 
-      local conceal_ns = vim.api.nvim_create_namespace "class_conceal"
+      local conceal_ns = vim.api.nvim_create_namespace("class_conceal")
 
       local language_tree = vim.treesitter.get_parser(bufnr, "tsx")
       local syntax_tree = language_tree:parse()
