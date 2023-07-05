@@ -1,45 +1,21 @@
-# A Neovim Plugin Template
+# tailwind-classes-fold for Neovim
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ellisonleao/nvim-plugin-template/default.yml?branch=main&style=for-the-badge)
-![Lua](https://img.shields.io/badge/Made%20with%20Lua-blueviolet.svg?style=for-the-badge&logo=lua)
+`tailwind-classes-fold` is a Neovim plugin that improves the readability of your Tailwind CSS classes by applying folding to lines with multiple classes.
 
-A template repository for Neovim plugins.
+## Features
 
-## Using it
+- Automatically folds lines with Tailwind classes
 
-Via `gh`:
 
-```
-$ gh repo create my-plugin -p ellisonleao/nvim-plugin-template
-```
+## Installation
 
-Via github web page:
+To install `tailwind-classes-fold`, use your favorite Neovim package manager. For example:
 
-Click on `Use this template`
+```vim
+plug:
 
-![](https://docs.github.com/assets/cb-36544/images/help/repository/use-this-template-button.png)
+Plug 'wwnbb/tailwind-classes-fold'
 
-## Features and structure
-
-- 100% Lua
-- Github actions to run tests and check for formatting errors (Stylua)
-- Tests created with [busted](https://olivinelabs.com/busted/) + [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
-- luarocks release support (LUAROCKS_API_KEY secret configuration required)
-
-### Plugin structure
-
-```
-.
-├── lua
-│   ├── plugin_name
-│   │   └── module.lua
-│   └── plugin_name.lua
-├── Makefile
-├── plugin
-│   └── plugin_name.lua
-├── README.md
-├── tests
-│   ├── minimal_init.lua
-│   └── plugin_name
-│       └── plugin_name_spec.lua
+packer:
+use 'wwnbb/tailwind-classes-fold'
 ```
