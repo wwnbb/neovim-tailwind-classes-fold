@@ -1,16 +1,16 @@
 local M = {}
 
+local conceal_ns = vim.api.nvim_create_namespace("class_conceal")
+
 M.setup_autocmd = function()
   ---Conceal HTML class attributes. Ideal for big TailwindCSS class lists
   ---Ref: https://gist.github.com/mactep/430449fd4f6365474bfa15df5c02d27b
   --
   vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" }, {
-    group = group,
     pattern = { "*.tsx" },
     callback = function()
       local bufnr = vim.api.nvim_get_current_buf()
-
-      local conceal_ns = vim.api.nvim_create_namespace("class_conceal")
+      vim.api.nvim_buf_clear_namespace(bufnr, conceal_ns, 0, -1)
 
       local language_tree = vim.treesitter.get_parser(bufnr, "tsx")
       local syntax_tree = language_tree:parse()
