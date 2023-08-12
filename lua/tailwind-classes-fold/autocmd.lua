@@ -23,7 +23,7 @@ M.setup_autocmd = function()
             (property_identifier) @attribute-name
             (string (string_fragment) @attribute-value))
             (#eq? @attribute-name "className")
-            (#set! @attribute-value conceal "…"))
+            (#set! @attribute-value conceal " 󱏿 "))
         ]]
       )
 
