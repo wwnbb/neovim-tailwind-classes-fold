@@ -3,9 +3,6 @@ local M = {}
 local conceal_ns = vim.api.nvim_create_namespace("class_conceal")
 
 M.setup_autocmd = function()
-  ---Conceal HTML class attributes. Ideal for big TailwindCSS class lists
-  ---Ref: https://gist.github.com/mactep/430449fd4f6365474bfa15df5c02d27b
-  --
   vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "TextChanged", "InsertLeave" }, {
     pattern = { "*.tsx" },
     callback = function()
@@ -27,13 +24,15 @@ M.setup_autocmd = function()
         ]]
       )
 
-      for _, captures, metadata in tsx_query:iter_matches(root, bufnr, root:start(), root:end_()) do
-        local start_row, start_col, end_row, end_col = captures[2]:range()
-        vim.api.nvim_buf_set_extmark(bufnr, conceal_ns, start_row, start_col, {
-          end_line = end_row,
-          end_col = end_col,
-          conceal = metadata[2].conceal,
-        })
+      for id, node, metadata in tsx_query:iter_matches(root, bufnr) do
+        if id == 2 then -- This corresponds to the @attribute-value capture
+          local start_row, start_col, end_row, end_col = node:range()
+          vim.api.nvim_buf_set_extmark(bufnr, conceal_ns, start_row, start_col, {
+            end_line = end_row,
+            end_col = end_col,
+            conceal = metadata.conceal,
+          })
+        end
       end
     end,
   })
