@@ -20,18 +20,22 @@ M.setup_autocmd = function()
             (property_identifier) @attribute-name
             (string (string_fragment) @attribute-value))
             (#eq? @attribute-name "className")
-            (#set! @attribute-value conceal "~"))
+            (#set! conceal "~"))
         ]]
       )
 
-      for id, node, metadata in tsx_query:iter_matches(root, bufnr) do
-        if id == 2 then -- This corresponds to the @attribute-value capture
-          local start_row, start_col, end_row, end_col = node:range()
-          vim.api.nvim_buf_set_extmark(bufnr, conceal_ns, start_row, start_col, {
-            end_line = end_row,
-            end_col = end_col,
-            conceal = metadata.conceal,
-          })
+      -- Using pairs to iterate over matches correctly
+      for _, match in tsx_query:iter_matches(root, bufnr) do
+        -- Find the attribute-value node from the match
+        for id, node in pairs(match) do
+          if tsx_query.captures[id] == "attribute-value" then
+            local start_row, start_col, end_row, end_col = node:range()
+            vim.api.nvim_buf_set_extmark(bufnr, conceal_ns, start_row, start_col, {
+              end_line = end_row,
+              end_col = end_col,
+              conceal = "~",
+            })
+          end
         end
       end
     end,
