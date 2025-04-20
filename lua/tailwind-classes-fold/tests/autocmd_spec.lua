@@ -1,0 +1,5 @@
+describe("autocmd.setup_autocmd", function()
+  it("should setup autocmd", function()
+    assert(vim.api.nvim_get_option("updatetime") > 1)
+  end)
+end)
